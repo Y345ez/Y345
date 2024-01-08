@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: "http://localhost:3000",
+  siteUrl: "https://y345.vercel.app",
   generateRobotsTxt: true,
   exclude: ["/node_modules"],
 };
