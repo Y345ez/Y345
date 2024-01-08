@@ -28,7 +28,7 @@ import python from "../src/utils/icons/techs/python.svg";
 import react from "../src/utils/icons/techs/react.svg";
 import mysql from "../src/utils/icons/techs/mysql.svg";
 
-// import preetSutharImage from "../src/utils/images/preetsuthar.png";
+
 
 import CustomTooltip from "../src/components/CustomTooltip";
 
@@ -234,7 +234,7 @@ const About = () => {
                   <div className="about-image">
                     <Image
                       className="about-PreetProfileImage"
-                      src={preetSutharImage}
+                      src={chrome}
                       width={240}
                       height={240}
                       alt="Y345"
