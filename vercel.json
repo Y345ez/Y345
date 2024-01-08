@@ -1,8 +1,10 @@
 {
-    "compilerOptions": {
-      "paths": {
-        "@/*": ["./*"]
-      }
-    }
+    "version": 2,
+    "builds": [
+      { "src": "path/to/source", "use": "@vercel/static-build" }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "/path/to/output/$1" }
+    ]
   }
   
