@@ -1,0 +1,230 @@
+@font-face {
+    font-family: "acid";
+    src: url("../../utils/fonts/acid.otf");
+  }
+  
+  @font-face {
+    font-family: "acid-small";
+    src: url("../../utils/fonts/acid_italic.otf");
+  }
+  
+  @font-face {
+    font-family: "Minecraft";
+    src: url("../../utils/fonts/MinecraftRegular-Bmg3.otf");
+  }
+  
+  .bed-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: left;
+    flex-wrap: wrap;
+    width: 92%;
+    margin: 0 auto;
+    flex: auto;
+    text-align: left;
+    transition: 0.4s ease-in-out !important;
+  }
+  .bed-box {
+    display: flex; 
+    opacity: 1;
+    flex-grow: 1;
+    flex-basis: 20rem;
+    gap: 5rem;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    background-color: var(--background-primary);
+    border: 02px solid rgba(235, 248, 255,0.1);
+  }
+  .intro-header {
+    color: black;
+    background: transparent;
+  
+    font-family: Acid;
+    font-size: 85px;
+    font-weight: 500;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    width: 450px;
+    padding-top: 25px;
+    padding: 45px;
+    margin-top: -25px;
+  }
+  
+  .intro-header .intro-subheader {
+    /* padding-top: 5px; */
+  
+    font-size: 35px;
+    font-weight: 250;
+    text-align: left;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background: transparent;
+    margin-top: -35px;
+  }
+  
+  .stat-panel-box {
+    background-color: var(--background-primary);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(235, 248, 255,0.1);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    display: block;
+    position: relative;
+    justify-content: left;
+    font-family: Minecraft;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .stat-panel-box .username-header {
+    background: transparent;
+    display: flex;
+    justify-content: left;
+    padding: 5px;
+    padding-bottom: 35px;
+    font-size: 255%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.55);
+  }
+  
+  .overall-stats {
+    color: var(--font-color);
+    border: 5px;
+    font-size: 30px;
+    text-align: left;
+    margin-left: 10px;
+    line-height: 135%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+    width: 350px;
+  }
+  
+  .player-head {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+  }
+  
+  .tabs {
+    display: flex;
+    font-size: 50px;
+    justify-content: right;
+    margin-left: 60%;
+  }
+  
+  .VIP {
+    color: #55ff55;
+    filter: brightness(100%);
+    background: transparent;
+  }
+  
+  .MVP {
+    color: #55ffff;
+    filter: brightness(100%);
+    background: transparent;
+  }
+  
+  .MVP_PLUS {
+    /* <span style="color:#FF5555">+</span> */
+    color: #55ffff;
+    filter: brightness(100%);
+    background: transparent;
+  }
+  
+  .no-rank {
+    color: black;
+  }
+  
+  .not-found {
+    font-family: Minecraft;
+    color: rgb(255, 0, 0);
+    padding-top: 20px;
+    width: 360px;
+  }
+  
+  .number {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    float: right;
+  }
+  
+  p {
+    display: inline;
+    background: transparent;
+  }
+  
+  .stats-tabs {
+    display: inline-block;
+    width: 650px;
+    height: 550px;
+    position: relative;
+    font-family: Minecraft;
+    font-size: 40px;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(8px);
+    border: 02px solid rgba(235, 248, 255,0.1);
+    background-color: var(--background-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .stats-tabs .gamemode-stats {
+    font-size: 25px;
+    display: flex;
+    padding: 15px;
+    z-index: 0;
+  }
+  
+  .gamemode-header {
+    display: flex;
+    font-size: 35px;
+  
+    justify-items: center;
+    justify-content: center;
+    padding-top: 15px;
+  }
+  
+  .gamemode-stat-labels {
+    margin-left: 1.2%;
+    font-size: 30px;
+  
+    display: flex;
+    flex-flow: row wrap;
+  }
+  
+  .gamemode-stat {
+    font-size: 35px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+  }
+  
+  .alignleft {
+    width: 25%;
+    text-align: left;
+    font-size: 23px;
+    margin: auto;
+  }
+  
+  .aligncenter {
+    width: 25%;
+    text-align: center;
+    font-size: 23px;
+    margin: auto;
+  }
+  
+  .alignright {
+    width: 25%;
+    text-align: right;
+    font-size: 23px;
+    margin: auto;
+  }
+.bedwars{
+  background-color: var(--background-primary);
+  backdrop-filter: blur(2px);
+  width: fit-content;
+  padding: -0.5rem 0.5rem;
+  margin-top: 0.7rem;
+  margin-right: 0.7rem;
+  font-size: 1.2rem;
+  border: 3px rgba(235, 248, 255,0.1) solid;
+}
+  

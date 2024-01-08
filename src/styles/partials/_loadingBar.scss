@@ -1,0 +1,13 @@
+#nprogress .bar {
+  background: var(--color-primary) !important;
+  background: linear-gradient(90deg, rgb(255, 0, 106), rgb(0, 110, 255));
+}
+
+#nprogress .spinner-icon {
+  border-top-color: rgb(255, 0, 106) !important;
+  border-left-color: var(--color-primary)!important;
+}
+
+#nprogress .bar {
+  height: 2px !important;
+}

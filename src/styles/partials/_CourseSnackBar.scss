@@ -1,0 +1,25 @@
+.course-snackbar {
+  z-index: 99999;
+  bottom: 10px;
+  font-size: 0.9rem;
+  width: fit-content;
+  padding: 0.6rem 1rem 0.3rem 0.8rem;
+  border-radius: 0 5px 5px 0;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  color: #fff;
+  background-color: var(--color-primary);//#f44336
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  .course-snackbarClose {
+    cursor: pointer;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+  }
+}
