@@ -100,7 +100,7 @@ const Home = () => {
   useEffect(() => {
     if (textRef.current) {
       fxRef.current = new TextScramble(textRef.current);
-      const phrases = ["***** "];
+      const phrases = ["yousef "];
       let counter = 0;
 
       const next = () => {
@@ -143,7 +143,7 @@ const Home = () => {
     return <span> {age} </span>;
   }
 
-  const birthdate = "2008-08-6";
+  const birthdate = "2004-08-6";
 
   return (
     <>
@@ -243,8 +243,8 @@ const Home = () => {
             <div className="section__content">
               <div className="section__heading">
                 <h1>
-                  <span data-text="*****" ref={textRef}></span>
-                  <span>*****</span>
+                  <span data-text="yousef" ref={textRef}></span>
+                  <span>raslan</span>
                 </h1>
               </div>
               <div className="section__subheading">
