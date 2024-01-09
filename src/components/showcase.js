@@ -95,16 +95,16 @@ const Home = () => {
   };
 
   const textRef = useRef(null);
-  let fx = null;
+  const fxRef = useRef(null);
 
   useEffect(() => {
     if (textRef.current) {
-      fx = new TextScramble(textRef.current);
+      fxRef.current = new TextScramble(textRef.current);
       const phrases = ["***** "];
       let counter = 0;
 
       const next = () => {
-        fx.setText(phrases[counter]).then(() => {
+        fxRef.current.setText(phrases[counter]).then(() => {
           setTimeout(next, 2500);
         });
         counter = (counter + 1) % phrases.length;
@@ -114,8 +114,8 @@ const Home = () => {
     }
 
     return () => {
-      if (fx) {
-        cancelAnimationFrame(fx.frameRequest);
+      if (fxRef.current) {
+        cancelAnimationFrame(fxRef.current.frameRequest);
       }
     };
   }, []);
@@ -153,7 +153,7 @@ const Home = () => {
             {session.user?.image && (
               <Image
                 src={session.user.image}
-                alt=""
+                alt="discord-image"
                 width={50}
                 height={50}
                 className="discord__img"
@@ -164,7 +164,7 @@ const Home = () => {
               {session.user?.discriminator}
             </span>
             <span className="discord__exit">
-            <FontAwesomeIcon
+              <FontAwesomeIcon
                 icon={faArrowRightFromBracket}
                 className="fa-brands fa-discord"
               />
@@ -310,7 +310,7 @@ const Home = () => {
             </div>
             <div className="section__description">
               <p>
-                Hello, my name is **** I'm a developer, my age is{" "}
+                Hello, my name is yousef I'm a developer, my age is{" "}
                 <AutomaticAge birthdate={birthdate} /> and known as Y345 on the
                 internet. My goal is to make a good quality product for
                 everyone’s budget. I'd consider myself fast in learning new

@@ -270,32 +270,38 @@ const AdminReviewList = () => {
                                     </div>
                                   </div>
                                   <p
-                    style={{
-                      fontSize: "0.9rem",
-                      textAlign: "left",
-                      marginBottom: "0.8rem",
-                    }}
-                    className={review.approved ? "approved" : "not-approved"}
-                  >
-                    {review.approved ? "Approved" : "Not approved"}
-                  </p>
-                  <button
-                    style={{ margin: "0.2rem" }}
-                    className="primary-btn-red"
-                    onClick={() => handleReject(review.id)}
-                    disabled={isLoading}
-                  >
-                    Reject
-                  </button>
-                  &nbsp;
-                  <button
-                    style={{ margin: "0.2rem" }}
-                    className="primary-btn-green"
-                    onClick={() => handleApprove(review.id)}
-                    disabled={isLoading}
-                  >
-                    Approve
-                  </button>
+                                    style={{
+                                      fontSize: "0.9rem",
+                                      textAlign: "left",
+                                      marginBottom: "0.8rem",
+                                    }}
+                                    className={
+                                      review.approved
+                                        ? "approved"
+                                        : "not-approved"
+                                    }
+                                  >
+                                    {review.approved
+                                      ? "Approved"
+                                      : "Not approved"}
+                                  </p>
+                                  <button
+                                    style={{ margin: "0.2rem" }}
+                                    className="primary-btn-red"
+                                    onClick={() => handleReject(review.id)}
+                                    disabled={isLoading}
+                                  >
+                                    Reject
+                                  </button>
+                                  &nbsp;
+                                  <button
+                                    style={{ margin: "0.2rem" }}
+                                    className="primary-btn-green"
+                                    onClick={() => handleApprove(review.id)}
+                                    disabled={isLoading}
+                                  >
+                                    Approve
+                                  </button>
                                 </>
                               </div>
                             </div>
