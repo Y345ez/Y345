@@ -76,13 +76,13 @@ export default function App({ Component, pageProps }) {
           {showDialog && (
             <Dialog onClose={handleCloseDialog} className="show" />
           )}
-          <Script src="https://www.googletagmanager.com/gtag/js?id=G-" />
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-GE0Q2SX5ZY" />
           <Script id="google-analytics">
             {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-');
+          gtag('config', 'G-GE0Q2SX5ZY');
         `}
           </Script>
         </>
