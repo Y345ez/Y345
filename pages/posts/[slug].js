@@ -327,6 +327,7 @@ export default function Post({ post, prevArticleData, nextArticleData }) {
                 the content valuable, please consider making a small donation.
                 whether it’s $1 or $5 🙂.
               </p>
+              
               <Link
                 href="https://donate.stripe.com/fZeaGJeU23Cn9u8288"
                 target="_blank"
@@ -346,7 +347,7 @@ export default function Post({ post, prevArticleData, nextArticleData }) {
                   marginTop: "0.6rem",
                 }}
               >
-                Secured by Stripe
+                Secured by Buymeacoffee
               </p>
             </div>
             {toc.length > 0 && (

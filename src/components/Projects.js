@@ -51,7 +51,7 @@ const Projects = () => {
                 projectName="Halfaheart Network"
                 projectDescription="Full Custom Website"
                 projectImage="https://i.imgur.com/wUvxEM7.png"
-                projectLink="https://preetsuthar.me"
+                projectLink="/comingsoon"
                 projectAbout="This is my minecraft website and blog website built running on next.js and react.js and using Vercel."
               />
               <ProjectCard

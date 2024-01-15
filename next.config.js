@@ -14,7 +14,7 @@ module.exports = {
     "lucide-react", 
   ],
   images: {
-    domains: ["cdn.discordapp.com","i.scdn.co","i.imgur.com"],
+    domains: ["cdn.discordapp.com","i.scdn.co","i.imgur.com","crafatar.com"],
   },
   webpack: (config, { isServer }) => {
     if (isServer) {

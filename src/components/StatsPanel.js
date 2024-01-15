@@ -88,12 +88,15 @@ export default function StatsPanel({ player_data }) {
         <div className="bed-box">
           <div className="stat-panel-box">
             <div className="username-header">
-              <Image
-                alt={"player_image"}
-                src={`https://crafatar.com/avatars/${player_data.uuid}?size=100&default=MHF_Steve&overlay`}
-                className="player-head"
-                style={{ marginRight: "30px", width: "85px", height: "85px" }}
-              />
+            <Image
+              alt={"player_image"}
+              src={`https://crafatar.com/avatars/${player_data.uuid}?size=100&default=MHF_Steve&overlay`}
+              className="player-head"
+              style={{ marginRight: "30px", height: "85px" }}
+              layout="fixed"
+              width={85}
+              height={85}
+            />
               <div className={getRank()}>
                 [{getLevel("bedwars_level")}]✫ {displayInfo("displayname")}
               </div>
@@ -469,7 +472,9 @@ export default function StatsPanel({ player_data }) {
               alt={"player_image"}
               src={`https://crafatar.com/avatars/97e85986-2c02-4941-be2c-a64f4c2aabb6?size=100&default=MHF_Steve&overlay`}
               className="player-head"
-              style={{ marginRight: "30px", width: "85px", height: "85px" }}
+              style={{ marginRight: "30px", height: "85px" }}
+              width={85}
+              height={85}
             />
             <div className="not-found">Player not found</div>
           </div>
