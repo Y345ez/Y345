@@ -10,67 +10,46 @@ import matter from "gray-matter";
 import html from "remark-html";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
-
-import MarkdownIt from "markdown-it";
-const md = new MarkdownIt();
-
 import twitterLogo from "../../src/utils/icons/twitter.svg";
-
-import { motion } from "framer-motion";
-
-import readArticles from "../../src/utils/readArticles";
-
-const Layout = dynamic(() => import("../../src/components/Layout"));
-const ScrollButton = dynamic(() => import("../../src/components/scrollButton"));
-const Footer = dynamic(() => import("../../src/components/footer"));
-
+import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "../../src/utils/supabaseClient";
 
-function convertIdToUuid(id) {
-  const hexId = id.toString(16);
-  const paddedHexId = hexId.padStart(32, "0");
-  const uuid = `${paddedHexId.substr(0, 8)}-${paddedHexId.substr(
-    8,
-    4
-  )}-${paddedHexId.substr(12, 4)}-${paddedHexId.substr(
-    16,
-    4
-  )}-${paddedHexId.substr(20)}`;
+import { useRouter } from "next/router";
 
-  return uuid;
-}
+const Layout = dynamic(() => import("../../src/components/Layout"));
+const Footer = dynamic(() => import("../../src/components/footer"));
 
-function calculateReadTime(content) {
-  const plainText = md.render(content);
+import hljs from "highlight.js/lib/core";
+import sql from "highlight.js/lib/languages/sql";
+import javascript from "highlight.js/lib/languages/javascript";
+import c from "highlight.js/lib/languages/c";
+import css from "highlight.js/lib/languages/css";
+import vbscriptHtml from "highlight.js/lib/languages/vbscript-html";
+import scss from "highlight.js/lib/languages/scss";
+import shell from "highlight.js/lib/languages/shell";
+import python from "highlight.js/lib/languages/python";
+import powershell from "highlight.js/lib/languages/powershell";
+import cpp from "highlight.js/lib/languages/cpp";
+import php from "highlight.js/lib/languages/php";
+import phpTemplate from "highlight.js/lib/languages/php-template";
+import xml from "highlight.js/lib/languages/xml";
 
-  const words = plainText.split(/\s+/).length;
+import convertIdToUuid from "../../src/utils/functions/convertIdToUuid";
+import calculateReadTime from "../../src/utils/functions/calculateReadTime";
+import generateTableOfContents from "../../src/utils/functions/generateTableOfContents";
+import formatDate from "../../src/utils/functions/formatDate";
+import readArticles from "../../src/utils/functions/readArticles";
 
-  const wordsPerMinute = 200;
-
-  const readTimeMinutes = words / wordsPerMinute;
-
-  const hours = Math.floor(readTimeMinutes / 60);
-  const remainingMinutes = Math.floor(readTimeMinutes % 60);
-  const seconds = Math.round((readTimeMinutes % 1) * 60);
-
-  let readTime = "";
-
-  if (hours > 0) {
-    readTime += `${hours} hour${hours > 1 ? "s" : ""} `;
-  }
-
-  if (remainingMinutes > 0 || (hours === 0 && seconds > 0)) {
-    readTime += `${Math.max(1, remainingMinutes)} minute${
-      remainingMinutes > 1 ? "s" : ""
-    } `;
-  }
-
-  return readTime.trim();
-}
-
-export default function Post({ post, prevArticleData, nextArticleData }) {
+export default function Post({
+  post,
+  prevArticleData,
+  nextArticleData,
+  similarTagArticles,
+}) {
   const [currentViews, setCurrentViews] = useState(post.views);
   const [twitterHref, setTwitterHref] = useState("");
+  const router = useRouter();
+  const { slug } = router.query;
 
   useEffect(() => {
     const tweetText = encodeURIComponent(post.frontmatter.title);
@@ -122,71 +101,44 @@ export default function Post({ post, prevArticleData, nextArticleData }) {
     incrementView();
   }, []);
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    // script.src = "https://giscus.app/client.js";
-    // script.setAttribute("data-repo", "preetsuthar17/comments");
-    // script.setAttribute("data-repo-id", "R_kgDOGIcPqw");
-    // script.setAttribute("data-category", "Announcements");
-    // script.setAttribute("data-category-id", "DIC_kwDOGIcPq84CZZYm");
-    // script.setAttribute("data-mapping", "pathname");
-    // script.setAttribute("data-strict", "0");
-    // script.setAttribute("data-reactions-enabled", "1");
-    // script.setAttribute("data-emit-metadata", "0");
-    // script.setAttribute("data-input-position", "bottom");
-    // script.setAttribute("data-theme", "dark");
-    // script.setAttribute("data-lang", "en");
-    // script.setAttribute("crossorigin", "anonymous");
-    // script.async = true;
-
-    const commentsContainer = document.getElementById("giscus-comments");
-    if (commentsContainer) {
-      commentsContainer.appendChild(script);
-    }
-  }, []);
-
-  const generateTableOfContents = (content) => {
-    const headings = [];
-    const toc = [];
-    const regex = /<h([1-2])>(.*?)<\/h\1>/g;
-    let match;
-
-    while ((match = regex.exec(content)) !== null) {
-      const headingLevel = parseInt(match[1]);
-      const headingText = match[2];
-      const slug = headingText
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)/g, "");
-
-      headings.push({ level: headingLevel, text: headingText, slug });
-    }
-
-    let currentLevel = 1;
-    const stack = [toc];
-
-    headings.forEach((heading, index) => {
-      const entry = { text: heading.text, slug: heading.slug, children: [] };
-      entry.id = `${heading.level === 1 ? "h1" : "h2"}-${heading.slug}`;
-
-      if (heading.level === 2) {
-        toc.push(entry);
-        currentLevel = 1;
-        stack.length = 1;
-        stack[0] = toc;
-      } else if (heading.level === 2 && currentLevel === 1) {
-        stack[stack.length - 1].push(entry);
-        stack.push(entry.children);
-        currentLevel = 2;
-      } else if (heading.level === 2 && currentLevel === 2) {
-        stack[stack.length - 1].push(entry);
-      }
-    });
-
-    return toc;
-  };
 
   const toc = generateTableOfContents(post.content);
+
+  const [activeAccordion, setActiveAccordion] = useState(null);
+
+  const sortedSimilarTagArticles = [...similarTagArticles].sort((a, b) => {
+    const dateA = new Date(a.frontmatter.date);
+    const dateB = new Date(b.frontmatter.date);
+    return dateA - dateB;
+  });
+
+  const handleAccordionClick = (articleId) => {
+    setActiveAccordion((prevActive) =>
+      prevActive === articleId ? null : articleId
+    );
+  };
+
+  const isAccordionActive = (articleId) => activeAccordion === articleId;
+
+  useEffect(() => {
+    hljs.registerLanguage("sql", sql);
+    hljs.registerLanguage("javascript", javascript);
+    hljs.registerLanguage("python", python);
+    hljs.registerLanguage("c", c);
+    hljs.registerLanguage("cpp", cpp);
+    hljs.registerLanguage("powershell", powershell);
+    hljs.registerLanguage("shell", shell);
+    hljs.registerLanguage("scss", scss);
+    hljs.registerLanguage("css", css);
+    hljs.registerLanguage("php", php);
+    hljs.registerLanguage("php-template", phpTemplate);
+    hljs.registerLanguage("html", xml);
+    hljs.registerLanguage("xml", xml);
+  });
+
+  useEffect(() => {
+    hljs.highlightAll({ detectLanguage: true });
+  });
 
   return (
     <motion.div
@@ -207,9 +159,9 @@ export default function Post({ post, prevArticleData, nextArticleData }) {
           <meta property="og:type" content="website" />
           <meta
             name="keywords"
-            content="Y345, Front-end Developer, Portfolio, Blog"
+            content="Preet Suthar, Front-end Developer, Portfolio, Blog"
           />{" "}
-          <meta name="author" content="Y345" />
+          <meta name="author" content="Preet Suthar" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
@@ -218,6 +170,7 @@ export default function Post({ post, prevArticleData, nextArticleData }) {
           <meta name="subject" content="web development" />
           <link rel="canonical" href="https://preetsuthar.me/posts" />
         </Head>
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></Script>
         <Script async src="https://js.stripe.com/v3/buy-button.js"></Script>
         <>
           <article id="post-top" className="container">
@@ -229,15 +182,27 @@ export default function Post({ post, prevArticleData, nextArticleData }) {
               }}
             >
               {post.frontmatter.tags.map((tag) => (
-                <div className="post-tag" key={tag}>
+                <div
+                  className="post-tag-slug"
+                  key={tag}
+                  style={{
+                    borderRadius: "5px",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <Link className="no-decoration p-color" href={`/tags/${tag}`}>
                     {tag}&nbsp;
                   </Link>
                 </div>
               ))}
             </div>
-            <div className="styled-hr" style={{ width: "100%" }}></div>
-            <div style={{ marginBottom: "2rem" }}>
+            <div className="styled-hr"></div>
+            <div
+              style={{
+                marginBottom: "2rem",
+              }}
+            >
               <div
                 className="author p-color"
                 style={{
@@ -264,15 +229,12 @@ export default function Post({ post, prevArticleData, nextArticleData }) {
                 </Link>
               </div>
               <time className="date">{post.frontmatter.date} - </time>
-              <span className="p-color date">{currentViews} views -</span>
-              <span
-                className="p-color date post-tag-slug"
-                style={{ margin: "0.5rem" }}
-              >
+              <span className="p-color date">{currentViews} views - </span>
+              <span className="p-color date" style={{ margin: "0.5rem 0" }}>
                 {post.readTime} read
               </span>
 
-              <div>
+              <div className="share_and_copy_link">
                 <abbr title="Share on X">
                   <Link href={twitterHref} data-size="large" target="_blank">
                     <Image
@@ -309,6 +271,78 @@ export default function Post({ post, prevArticleData, nextArticleData }) {
               </div>
             </div>
 
+            <div className="related-blogs">
+              <div
+                className={`accordion ${isAccordionActive("") ? "active" : ""}`}
+                onClick={() => handleAccordionClick("")}
+              >
+                Blogs with {post.frontmatter.tags.join(", ")} tag(s)
+                <p>{` ${isAccordionActive("") ? "▲" : "▼ "}`}</p>
+              </div>
+              <AnimatePresence>
+                {isAccordionActive("") && (
+                  <motion.div
+                    initial="collapsed"
+                    animate="open"
+                    exit="collapsed"
+                    variants={{
+                      open: { opacity: 1, height: "auto" },
+                      collapsed: { opacity: 0, height: 0 },
+                    }}
+                  >
+                    {sortedSimilarTagArticles.length > 0 ? (
+                      <ul>
+                        {sortedSimilarTagArticles.map((article) => (
+                          <li key={article.frontmatter.id}>
+                            <div className="accordion-items">
+                              <motion.div
+                                initial="collapsed"
+                                animate={
+                                  isAccordionActive(article.frontmatter.id)
+                                    ? "open"
+                                    : "collapsed"
+                                }
+                                variants={{
+                                  open: { opacity: 1, height: "auto" },
+                                }}
+                              >
+                                <Link href={`/posts/${article.slug}`}>
+                                  {article.frontmatter.title}
+                                </Link>
+                                {isAccordionActive(article.frontmatter.id) && (
+                                  <div className="accordion-content"></div>
+                                )}
+                              </motion.div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <ul>
+                        <li>
+                          <div className="accordion-items">
+                            <motion.div
+                              initial="collapsed"
+                              variants={{
+                                open: { opacity: 1, height: "auto" },
+                              }}
+                            >
+                              <p
+                                style={{
+                                  color: "#aaa",
+                                }}
+                              >
+                                No blogs found
+                              </p>
+                            </motion.div>
+                          </div>
+                        </li>
+                      </ul>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
             <div
               className="donateUs"
               style={{
@@ -327,7 +361,6 @@ export default function Post({ post, prevArticleData, nextArticleData }) {
                 the content valuable, please consider making a small donation.
                 whether it’s $1 or $5 🙂.
               </p>
-              
               <Link
                 href="https://donate.stripe.com/fZeaGJeU23Cn9u8288"
                 target="_blank"
@@ -347,11 +380,11 @@ export default function Post({ post, prevArticleData, nextArticleData }) {
                   marginTop: "0.6rem",
                 }}
               >
-                Secured by Buymeacoffee
+                Secured by Stripe
               </p>
             </div>
             {toc.length > 0 && (
-              <div className="tableOfContent" style={{ paddingBottom: "1rem" }}>
+              <div className="tableOfContent" style={{ paddingBottom: "2rem" }}>
                 <h2>On this page</h2>
                 <ul>
                   {toc.map((item, index) => (
@@ -421,9 +454,10 @@ export default function Post({ post, prevArticleData, nextArticleData }) {
                   Share on X
                 </Link>{" "}
               </span>
+              <div></div>
             </div>
+
             <hr />
-            <div id="giscus-comments" />
             <div className="post-navigation">
               <div className="prev">
                 {prevArticleData && (
@@ -440,10 +474,9 @@ export default function Post({ post, prevArticleData, nextArticleData }) {
                 )}
               </div>
             </div>
+            <Footer />
           </article>
         </>
-        <ScrollButton />
-        <Footer />
       </Layout>
     </motion.div>
   );
@@ -478,14 +511,6 @@ export async function getStaticProps({ params }) {
     authorGithub: data.authorGithub,
     tags: data.tags,
   };
-
-  function formatDate(date) {
-    const options = { month: "short", day: "2-digit", year: "numeric" };
-    const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
-      new Date(date)
-    );
-    return formattedDate;
-  }
 
   const articles = readArticles();
   const currentIndex = articles.findIndex(
@@ -523,6 +548,24 @@ export async function getStaticProps({ params }) {
   const readTime = calculateReadTime(contentHtml);
   const views = viewsData ? viewsData.views : 0;
 
+  const similarTagArticles = articles.filter(
+    (article) =>
+      article.frontmatter.id !== frontmatter.id &&
+      article.frontmatter.tags.some((tag) => frontmatter.tags.includes(tag))
+  );
+
+  // Convert date objects to strings only if it's a valid Date object
+  const serializableSimilarTagArticles = similarTagArticles.map((article) => ({
+    ...article,
+    frontmatter: {
+      ...article.frontmatter,
+      date:
+        article.frontmatter.date instanceof Date
+          ? article.frontmatter.date.toISOString()
+          : article.frontmatter.date,
+    },
+  }));
+
   return {
     props: {
       post: {
@@ -533,6 +576,7 @@ export async function getStaticProps({ params }) {
       },
       prevArticleData,
       nextArticleData,
+      similarTagArticles: serializableSimilarTagArticles,
     },
   };
 }

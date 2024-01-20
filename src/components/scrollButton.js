@@ -36,7 +36,6 @@ export default function Home() {
     >
       <Layout>
         <>
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
           <button className="scroll-button">
           {/* <svg xmlns="http://www.w3.org/2000/svg" 
                width="35" 

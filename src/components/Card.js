@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
-
-import 'balloon-css';
-
+import "balloon-css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 
 const Star = ({ value }) => {
-  // Function to render stars with specified color count
   const renderStars = (count) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      const starColor = i <= count ? '#FFD700' : '#ccc'; // Yellow for filled stars, gray for empty stars
+      const starColor = i <= count ? "#FFD700" : "#ccc";
       stars.push(
-      <span key={i} className="fa fa-star-o" style={{ color: starColor }}>
-        <FontAwesomeIcon icon={faStar} />
-      </span>
-
+        <span key={i} className="fa fa-star-o" style={{ color: starColor }}>
+          <FontAwesomeIcon icon={faStar} />
+        </span>
       );
     }
     return stars;
@@ -23,16 +19,22 @@ const Star = ({ value }) => {
 
   return (
     <li>
-      {value !== null && value !== 0 ? (
-        renderStars(value)
-      ) : (
-        <span></span>
-      )}
+      {value !== null && value !== 0 ? renderStars(value) : <span></span>}
     </li>
   );
 };
 
-const Card = ({ heading, image, rating, price, service, quality, speed, recommend, description }) => {
+const Card = ({
+  heading,
+  image,
+  rating,
+  price,
+  service,
+  quality,
+  speed,
+  recommend,
+  description,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -69,8 +71,7 @@ const Card = ({ heading, image, rating, price, service, quality, speed, recommen
                 </ul>
               </div>
               <div className="star">
-                <ul className="star__rating star__out">
-                </ul>
+                <ul className="star__rating star__out"></ul>
               </div>
             </div>
             <div className="reviews__item__Line"></div>
@@ -107,11 +108,12 @@ const Card = ({ heading, image, rating, price, service, quality, speed, recommen
           </>
         ) : (
           <>
-           <div className="reviews__img" style={{ backgroundImage: `url(${image})`}}></div>
+            <div
+              className="reviews__img"
+              style={{ backgroundImage: `url(${image})` }}
+            ></div>
             <div className="reviews__item__name">{heading}</div>
-            <div className="reviews__item__description">
-              {description}
-            </div>
+            <div className="reviews__item__description">{description}</div>
             <div className="reviews__item__Line"></div>
             <div className="reviews__item__rating">
               <div className="container-r">
@@ -121,7 +123,9 @@ const Card = ({ heading, image, rating, price, service, quality, speed, recommen
                   {service !== null && service !== 0 && <li>Service</li>}
                   {quality !== null && quality !== 0 && <li>Quality</li>}
                   {speed !== null && speed !== 0 && <li>Speed</li>}
-                  {recommend !== null && recommend !== 0 && <li>Recommended</li>}
+                  {recommend !== null && recommend !== 0 && (
+                    <li>Recommended</li>
+                  )}
                 </ul>
               </div>
               <div className="star">
@@ -133,7 +137,7 @@ const Card = ({ heading, image, rating, price, service, quality, speed, recommen
                   <Star value={speed} />
                   <Star value={recommend} />
                 </ul>
-            </div>
+              </div>
             </div>
             <div className="reviews__item__Line"></div>
             <div className="reviews__item__date">
@@ -170,7 +174,6 @@ const Card = ({ heading, image, rating, price, service, quality, speed, recommen
         )}
       </div>
     </div>
-
 
     // <div className={`review-card${isLoading ? " loading" : ""}`}>
     //   {isLoading ? (

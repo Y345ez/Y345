@@ -24,6 +24,7 @@ import Projects from "./Projects";
 import CustomTooltip from "./CustomTooltip";
 import Spotify from "./spotify";
 import { motion } from "framer-motion";
+import AutomaticAge from "../../src/functions/AutomaticAge";
 
 class TextScramble {
   constructor(el) {
@@ -120,28 +121,28 @@ const Home = () => {
     };
   }, []);
 
-  function AutomaticAge({ birthdate }) {
-    const calculateAge = useCallback(() => {
-      const birthDate = new Date(birthdate);
-      const currentDate = new Date();
-      const age = Math.floor(
-        (currentDate - birthDate) / (365.25 * 24 * 60 * 60 * 1000)
-      );
-      return age;
-    }, [birthdate]);
+  // function AutomaticAge({ birthdate }) {
+  //   const calculateAge = useCallback(() => {
+  //     const birthDate = new Date(birthdate);
+  //     const currentDate = new Date();
+  //     const age = Math.floor(
+  //       (currentDate - birthDate) / (365.25 * 24 * 60 * 60 * 1000)
+  //     );
+  //     return age;
+  //   }, [birthdate]);
 
-    const [age, setAge] = useState(calculateAge());
+  //   const [age, setAge] = useState(calculateAge());
 
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setAge(calculateAge());
-      }, 24 * 60 * 60 * 1000);
+  //   useEffect(() => {
+  //     const interval = setInterval(() => {
+  //       setAge(calculateAge());
+  //     }, 24 * 60 * 60 * 1000);
 
-      return () => clearInterval(interval);
-    }, [calculateAge]);
+  //     return () => clearInterval(interval);
+  //   }, [calculateAge]);
 
-    return <span> {age} </span>;
-  }
+  //   return <span> {age} </span>;
+  // }
 
   const birthdate = "2004-08-6";
 

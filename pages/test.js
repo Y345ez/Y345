@@ -135,7 +135,7 @@ const About = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: element,
-          start: "top 90%",
+          start: "top 80%",
           end: "bottom center",
           scrub: 1,
         },
@@ -188,7 +188,7 @@ const About = () => {
         transition={{ duration: 1.2 }}
       >
         <Head>
-          <title>About | Y345</title>
+          <title>tast</title>
           <meta name="robots" content="all" />
 
           <meta name="description" content="About page" />
@@ -218,175 +218,8 @@ const About = () => {
                 exit={{ opacity: 1, translateX: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="about-header">
-                  <h1>&#47;about</h1>
-                  <p>Uh.. Um.. About me maybe, lol</p>
-                </div>
-              </motion.div>
-              <div className="styled-hr"></div>
-              <div className="about-wrapper">
-                <motion.div
-                  initial={{ opacity: 0, translateX: -100 }}
-                  animate={{ opacity: 1, translateX: 0 }}
-                  exit={{ opacity: 1, translateX: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                >
-                  <div className="about-image">
-                    <Image
-                      className="about-PreetProfileImage"
-                      src={chrome}
-                      width={240}
-                      height={240}
-                      alt="Y345"
-                      loading="lazy"
-                      placeholder="blur"
-                    />
-
-                    <p style={{ margin: "1rem", padding: "2rem " }}>
-                      <Link
-                        href="mailto:preetsuthar.me"
-                        className="primary-btn"
-                      >
-                        Hire me!
-                      </Link>
-                    </p>
-                  </div>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, translateY: 80 }}
-                  animate={{ opacity: 1, translateY: 0 }}
-                  exit={{ opacity: 0, translateY: 0 }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
-                >
-                  <div className="about-container">
-                    <div className="about-text-img">
-                      <div className="about-text">
-                        <p ref={typingRefs.current[0]}>
-                          Hello! I&apos;m Y345, a self-taught web
-                          developer in India with more than two years of
-                          experience. I&apos;m{" "}
-                          <AutomaticAge birthdate={birthdate} /> years old and I
-                          started this web development journey back in 2020, a
-                          clumsy kid creating webpages and all with HTML.
-                        </p>
-                        <p
-                          ref={typingRefs.current[1]}
-                          style={{ display: "none" }}
-                        >
-                          Currently at the age of{" "}
-                          <AutomaticAge birthdate={birthdate} />I am very much
-                          passionate about Web development. I am constantly
-                          learning and trying to keep up with new technologies
-                          about front-end development. Not to mention I am also
-                          learning full-stack development This website is just
-                          Front-End or maybe Back-End because I have used
-                          database implementation in the reviews section.{" "}
-                        </p>
-
-                        <div className="about-contact-links">
-                          <ul
-                            style={{
-                              marginTop: "1rem",
-                            }}
-                          >
-                            <Link
-                              className="link-color about-contact-link no-decoration"
-                              href="https://github.com/preetsuthar17"
-                              target="_blank"
-                              style={{
-                                flexGrow: "1",
-                              }}
-                            >
-                              <li> GitHub</li>
-                            </Link>
-                            <Link
-                              className="link-color about-contact-link no-decoration"
-                              href="mailto:preetsutharxd@gmail.com"
-                              target="_blank"
-                              style={{
-                                flexGrow: "1",
-                              }}
-                            >
-                              <li>Email</li>
-                            </Link>
-                            <Link
-                              className="link-color about-contact-link no-decoration"
-                              href="https://discord.gg/XeQ95WzGq9"
-                              target="_blank"
-                              style={{
-                                flexGrow: "1",
-                              }}
-                            >
-                              <li>Discord Server</li>
-                            </Link>
-                            <Link
-                              className="link-color about-contact-link no-decoration"
-                              href="https://twitter.com/preetsuthar17"
-                              target="_blank"
-                              style={{
-                                flexGrow: "1",
-                              }}
-                            >
-                              <li>Twitter</li>
-                            </Link>
-                            <Link
-                              className="link-color about-contact-link no-decoration"
-                              href="https://instagram.com/nottpreet28"
-                              target="_blank"
-                              style={{
-                                flexGrow: "1",
-                              }}
-                            >
-                              <li>Instagram</li>
-                            </Link>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="donateUs"
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
-                    >
-                      <p
-                        style={{
-                          textAlign: "left",
-                          marginBottom: "1rem",
-                        }}
-                        className="p-color"
-                      >
-                        I rely on your support to keep this website running. If
-                        you find the content valuable, please consider making a
-                        small donation.
-                      </p>
-                      <Link
-                        href="https://donate.stripe.com/fZeaGJeU23Cn9u8288"
-                        target="_blank"
-                        className="donateButton"
-                        style={{
-                          color: "#aaa",
-                          textAlign: "left",
-                        }}
-                      >
-                        Donate
-                      </Link>{" "}
-                      <span
-                        style={{
-                          color: "#aaa",
-                          fontSize: "0.8rem",
-                          textAlign: "left",
-                          marginTop: "0.6rem",
-                        }}
-                      >
-                        &nbsp;&nbsp;Secured by Stripe
-                      </span>
-                    </div>
-                  </div>
                 </motion.div>
               </div>
-            </div>
             <div className="aboutToolsFloating-container">
               {Array.from({ length: 1 }, (_, index) => (
                 <motion.div
@@ -609,7 +442,7 @@ const About = () => {
                   transition={{ duration: 1, delay: 1.5 }}
                 >
                   <section id="cd-timeline" className="cd-container">
-                    {/* <div className="cd-timeline-block">
+                    <div className="cd-timeline-block">
                       <div className="cd-timeline-img cd-picture"></div>
 
                       <div className="cd-timeline-content">
@@ -628,7 +461,7 @@ const About = () => {
                           <li>React.js</li>
                         </ul>
                       </div>
-                    </div> */}
+                    </div>
 
                     <div className="cd-timeline-block">
                       <div className="cd-timeline-img cd-movie"></div>
@@ -672,7 +505,7 @@ const About = () => {
                       </div>
                     </div>
 
-                    {/* <div className="cd-timeline-block">
+                    <div className="cd-timeline-block">
                       <div className="cd-timeline-img cd-picture"></div>
 
                       <div className="cd-timeline-content">
@@ -685,7 +518,7 @@ const About = () => {
                         </p>
                         <span className="cd-date">May 9, 2021</span>
                       </div>
-                    </div> */}
+                    </div>
 
                     <div className="cd-timeline-block">
                       <div className="cd-timeline-img cd-location"></div>
@@ -701,7 +534,7 @@ const About = () => {
                       </div>
                     </div>
 
-                    {/* <div className="cd-timeline-block">
+                    <div className="cd-timeline-block">
                       <div className="cd-timeline-img cd-location"></div>
 
                       <div className="cd-timeline-content">
@@ -713,7 +546,7 @@ const About = () => {
                         </p>
                         <span className="cd-date">Sep 1, 2020</span>
                       </div>
-                    </div> */}
+                    </div>
 
                     <div className="cd-timeline-block">
                       <div className="cd-timeline-img cd-movie"></div>

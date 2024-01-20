@@ -241,7 +241,6 @@ const Skills = () => {
                   </div> */}
             </ul>
             <i id="right" className='bx bx-chevron-right i'></i>
-            {/* <FontAwesomeIcon id="right" className="fa-solid fa-angle-right i" icon={faAngleRight} /> */}
           </div>
         </div>
       </div>

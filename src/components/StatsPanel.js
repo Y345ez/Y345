@@ -88,15 +88,15 @@ export default function StatsPanel({ player_data }) {
         <div className="bed-box">
           <div className="stat-panel-box">
             <div className="username-header">
-            <Image
-              alt={"player_image"}
-              src={`https://crafatar.com/avatars/${player_data.uuid}?size=100&default=MHF_Steve&overlay`}
-              className="player-head"
-              style={{ marginRight: "30px", height: "85px" }}
-              layout="fixed"
-              width={85}
-              height={85}
-            />
+              <Image
+                alt={"player_image"}
+                src={`https://crafatar.com/avatars/${player_data.uuid}?size=100&default=MHF_Steve&overlay`}
+                className="player-head"
+                style={{ marginRight: "30px", height: "85px" }}
+                layout="fixed"
+                width={85}
+                height={85}
+              />
               <div className={getRank()}>
                 [{getLevel("bedwars_level")}]✫ {displayInfo("displayname")}
               </div>
