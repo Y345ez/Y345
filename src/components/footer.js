@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons/faClose";
-import Qrcode from "../utils/images/qrcode.png";
+import Qrcode from "../utils/images/Qrcode.png";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Footer = () => {
