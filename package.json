@@ -30,6 +30,7 @@
     "devicon": "^2.15.1",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
+    "fetcher": "^0.3.0",
     "framer-motion": "^10.16.4",
     "fs": "^0.0.1-security",
     "fs-extra": "^11.1.1",

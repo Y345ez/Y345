@@ -6,6 +6,7 @@ import Qrcode from "../utils/images/Qrcode.png";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -75,12 +76,10 @@ const Footer = () => {
       <footer className="footer">
         <div className="footer__container">
           <div className="footer__content">
-            <div
-              className="y345h1"
-              data-value="© 2023 All rights reserved | Made by Y345"
-            >
-              © 2023 All rights reserved | Made by Y345
-            </div>
+            <div className="y345h1"
+                 data-value={`© ${currentYear} All rights reserved | Made by Y345`}>
+                 &#169;{currentYear} All rights reserved | Made by Y345
+             </div>
             <div className="qr" id="qr-logout" onClick={openModal}>
               <i className="bx bx-qr"></i>
             </div>
@@ -126,6 +125,29 @@ const Footer = () => {
           </div>
         </div>
       </footer>
+      <div>
+        <svg
+          className="waves"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          viewBox="0 24 150 28"
+          preserveAspectRatio="none"
+          shapeRendering="auto"
+        >
+          <defs>
+            <path
+              id="gentle-wave"
+              d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+            />
+          </defs>
+          <g className="parallax">
+            <use xlinkHref="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+            <use xlinkHref="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+            <use xlinkHref="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+            <use xlinkHref="#gentle-wave" x="48" y="7" fill="#fff" />
+          </g>
+        </svg>
+      </div>
     </>
   );
 };
